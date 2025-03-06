@@ -2,6 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setAdmin } from "../redux/slices/adminSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -9,6 +12,9 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("Form data", data);
@@ -18,9 +24,17 @@ const Login = () => {
         data,
         { withCredentials: true }
       );
+
       console.log("Response", response);
+
       if (response.data) {
         toast.success(response.data.message || "Login Successful");
+
+        // Dispatch admin data to Redux store
+        dispatch(setAdmin(response.data.admin));
+
+        // Redirect to dashboard after login
+        navigate("/dashboard");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to Login");
