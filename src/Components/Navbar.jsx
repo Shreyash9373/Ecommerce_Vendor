@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { HiMenu, HiX, HiHome } from "react-icons/hi";
+import { clearVendor } from "../redux/slices/vendorSlice";
 import {
   FaShoppingCart,
   FaCubes,
@@ -8,11 +10,19 @@ import {
   FaUser,
   FaUsers,
   FaChartPie,
+  FaSignOutAlt,
 } from "react-icons/fa";
-import { HiHome } from "react-icons/hi";
 
-const Navbar = () => {
+const Navbar = ({ vendor }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Handle Logout
+  const handleLogout = () => {
+    dispatch(clearVendor()); // Clear Redux state
+    navigate("/"); // Redirect to login page
+  };
 
   return (
     <>
@@ -30,11 +40,26 @@ const Navbar = () => {
         <NavLink to="/" className="text-xl font-bold">
           Remos
         </NavLink>
+
+        {/* Vendor Info & Logout */}
+        {vendor && (
+          <div className="flex items-center gap-4">
+            <span className="hidden md:inline">Welcome, {vendor.name}!</span>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-red-500 hover:bg-red-700 px-4 py-2 rounded"
+            >
+              <FaSignOutAlt />
+              Logout
+            </button>
+          </div>
+        )}
       </nav>
 
       {/* Mobile Sidebar */}
       {sidebarOpen && (
         <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg p-5 z-50 md:hidden">
+          {/* Toggle Button  */}
           <button
             className="absolute top-4 right-4 text-2xl text-gray-600"
             onClick={() => setSidebarOpen(false)}

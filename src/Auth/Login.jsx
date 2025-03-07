@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { setAdmin } from "../redux/slices/adminSlice.js";
+import { setVendor } from "../redux/slices/vendorSlice.js";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -20,7 +20,7 @@ const Login = () => {
     console.log("Form data", data);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URI}/api/v1/admin/login`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/login`,
         data,
         { withCredentials: true }
       );
@@ -31,7 +31,7 @@ const Login = () => {
         toast.success(response.data.message || "Login Successful");
 
         // Dispatch admin data to Redux store
-        dispatch(setAdmin(response.data.admin));
+        dispatch(setVendor(response.data.data.vendor));
 
         // Redirect to dashboard after login
         navigate("/dashboard");

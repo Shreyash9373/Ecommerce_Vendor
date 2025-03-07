@@ -5,34 +5,35 @@ import { useSelector } from "react-redux";
 import ProtectedRoute from "./Components/ProtectedRoutes.jsx";
 import Login from "./Auth/Login";
 import Navbar from "./Components/Navbar.jsx";
-import Sidebar from "./Components/Sidebar.jsx"; // Import Sidebar
+import Sidebar from "./Components/Sidebar.jsx";
 import Dashboard from "./Pages/Dashboard";
 import NotFound from "./Pages/NotFound";
+import AddProduct from "./Pages/AddProduct.jsx";
+import ViewProducts from "./Components/ViewProducts.jsx";
+import ProductDetails from "./Pages/ProductDetails.jsx";
 
 const App = () => {
-  const { isAuthenticated } = useSelector((state) => state.admin);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
+  const { isAuthenticated, vendor } = useSelector((state) => state.vendor); // Get vendor details
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <Router>
       <ToastContainer />
-      {isAuthenticated && <Navbar />} {/* Navbar visible after login */}
+      {isAuthenticated && <Navbar vendor={vendor} />} {/* Pass vendor details */}
       <div className="flex h-screen">
-        {/* Sidebar (Hidden behind navbar) */}
         {isAuthenticated && <Sidebar isOpen={isSidebarOpen} toggleSidebar={setIsSidebarOpen} />}
 
-        {/* Main Content Area */}
         <div className={`flex-1 transition-all p-6 ${isAuthenticated ? "md:ml-64" : ""}`}>
           <Routes>
-            {/* Public Route */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
 
-            {/* Protected Routes (Require Authentication) */}
+            {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/view-products" element={<ViewProducts />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
             </Route>
-
-            {/* Catch-All 404 Page */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

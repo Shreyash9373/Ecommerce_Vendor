@@ -30,8 +30,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <ul className=" h-full space-y-4">
             {[
               { to: "/", icon: <HiHome />, label: "Dashboard" },
-              { to: "/ecommerce", icon: <FaShoppingCart />, label: "Ecommerce" },
-              { to: "/category", icon: <FaCubes />, label: "Category" },
+              { to: "/view-products", icon: <FaShoppingCart />, label: "View Products" },
+              { to: "/add-product", icon: <FaCubes />, label: "Add Product" },
               { to: "/orders", icon: <FaClipboardList />, label: "Orders" },
               { to: "/users", icon: <FaUser />, label: "Users" },
               { to: "/roles", icon: <FaUsers />, label: "Roles" },
@@ -62,7 +62,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       {/* Hamburger Menu (Mobile Only) */}
       <div className="fixed top-4 left-4 z-50 md:hidden">
-        <button className="text-2xl text-gray-700" onClick={() => toggleSidebar(!isOpen)}>
+        <button
+          className="text-2xl bg-transparent text-transparent"
+          onClick={() => toggleSidebar(!isOpen)}
+        >
           <HiMenuAlt3 />
         </button>
       </div>
