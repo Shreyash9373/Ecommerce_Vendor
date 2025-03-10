@@ -9,8 +9,10 @@ import Sidebar from "./Components/Sidebar.jsx";
 import Dashboard from "./Pages/Dashboard";
 import NotFound from "./Pages/NotFound";
 import AddProduct from "./Pages/AddProduct.jsx";
-import ViewProducts from "./Components/ViewProducts.jsx";
+import ViewProducts from "./Pages/ViewProducts.jsx";
 import ProductDetails from "./Pages/ProductDetails.jsx";
+import EditProduct from "./Pages/EditProduct.jsx";
+import ScrolltoTop from "./Components/ScrollToTop.jsx";
 
 const App = () => {
   const { isAuthenticated, vendor } = useSelector((state) => state.vendor); // Get vendor details
@@ -18,7 +20,26 @@ const App = () => {
 
   return (
     <Router>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{
+          maxWidth: "300px",
+          borderRadius: "4px",
+          fontSize: "0.875rem",
+          padding: "8px",
+          color: "#050505",
+          fontFamily: "sans-serif",
+        }}
+      />
+      <ScrolltoTop />
       {isAuthenticated && <Navbar vendor={vendor} />} {/* Pass vendor details */}
       <div className="flex h-screen">
         {isAuthenticated && <Sidebar isOpen={isSidebarOpen} toggleSidebar={setIsSidebarOpen} />}
@@ -33,6 +54,7 @@ const App = () => {
               <Route path="/view-products" element={<ViewProducts />} />
               <Route path="/add-product" element={<AddProduct />} />
               <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/edit-product/:id" element={<EditProduct />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

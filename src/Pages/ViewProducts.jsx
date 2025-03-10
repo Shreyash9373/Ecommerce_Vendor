@@ -41,7 +41,7 @@ const ViewProducts = () => {
           <img
             src={product.images[0]}
             alt={product.name}
-            className="w-full h-40 object-cover rounded"
+            className="w-full h-52 object-contain rounded"
           />
           <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
           <p className="text-gray-600">₹{product.price}</p>

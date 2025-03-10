@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ProductDetails = () => {
   const location = useLocation();
   const { product: navigatedProduct } = location.state || {}; // Get product data from navigation state
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState(navigatedProduct || null);
   const [loading, setLoading] = useState(!navigatedProduct);
   const [error, setError] = useState(null);
@@ -16,7 +18,8 @@ const ProductDetails = () => {
       const fetchProduct = async () => {
         try {
           const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URI}/api/v1/get-product/${id}`
+            `${import.meta.env.VITE_BACKEND_URI}/api/v1/get-product/${id}`,
+            { withCredentials: true }
           );
           setProduct(response.data.product);
           setMainImage(response.data.product.images[0]);
@@ -30,6 +33,10 @@ const ProductDetails = () => {
       fetchProduct();
     }
   }, [id, navigatedProduct]);
+
+  const goToUpdateProduct = (product) => {
+    navigate(`/edit-product/${product._id}`, { state: { product } }); // Pass event data as state
+  };
 
   if (loading) return <p>Loading product details...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -95,7 +102,7 @@ const ProductDetails = () => {
           <div className="mt-4">
             <p className="text-xl font-semibold text-gray-800">
               Price: <span className="line-through text-red-500">${product.price}</span>{" "}
-              <span className="text-green-600">${product.finalPrice}</span>
+              <span className="text-green-600">₹{product.finalPrice}</span>
             </p>
             <p className="text-sm text-gray-500">Discount: {product.discount}%</p>
           </div>
@@ -127,7 +134,10 @@ const ProductDetails = () => {
           </div>
 
           {/* View More Button */}
-          <button className="mt-6 w-full bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 text-lg font-semibold">
+          <button
+            onClick={() => goToUpdateProduct(product)}
+            className="mt-6 w-full bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 text-lg font-semibold"
+          >
             Edit Details
           </button>
         </div>
