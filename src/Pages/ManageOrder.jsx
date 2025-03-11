@@ -66,10 +66,44 @@ const ManageOrder = () => {
             </p>
           </div>
 
+          <div className="mb-4 p-3 bg-gray-100 rounded-md">
+            <h3 className="text-lg font-semibold mb-2">Product Details:</h3>
+            <div>
+              {order.items.map((item) => (
+                <div key={item._id} className="text-gray-800">
+                  <p>
+                    <span className="font-medium">Product Name: </span> {item.productSnapshot.name}
+                  </p>
+                  <p>
+                    <span className="font-medium">Product Price: </span>{" "}
+                    {item.productSnapshot.price}
+                  </p>
+                  <p>
+                    <span className="font-medium">Product Quantity: </span>
+                    {item.quantity}
+                    {item.productSnapshot.quantity}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mb-4 p-3 bg-gray-100 rounded-md">
+            <h3 className="text-lg font-semibold mb-2">Payment Details:</h3>
+            <p>
+              <span className="font-medium">Payment Amount: </span> {order.totalAmount}
+            </p>
+            <p>
+              <span className="font-medium">Payment Method: </span> {order.paymentMethod}
+            </p>
+            <p>
+              <span className="font-medium">Payment Status: </span> {order.paymentStatus}
+            </p>
+          </div>
+
+          {/* Change Status  */}
           <p className="mb-4 text-gray-700">
             <span className="font-semibold">Current Status:</span> {order.status}
           </p>
-
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
             <Controller
               name={`status-${order._id}`}
