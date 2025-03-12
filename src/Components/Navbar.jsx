@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-green-800 text-white sticky top-0 shadow-md z-50 w-full p-4 flex justify-between items-center">
+      <nav className="bg-blue-800 text-white sticky top-0 shadow-md z-50 w-full p-4 flex justify-between items-center">
         {/* Toggle Sidebar Button */}
         <button
           className="md:hidden text-white text-2xl"
