@@ -53,7 +53,7 @@ const ProductDetails = () => {
             className="w-full h-96 object-cover rounded-lg shadow"
           />
           <div className="flex gap-2 mt-4 overflow-x-auto">
-            {product.images.map((img, index) => (
+            {product.images?.map((img, index) => (
               <img
                 key={index}
                 src={img}

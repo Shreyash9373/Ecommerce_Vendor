@@ -37,8 +37,8 @@ const Navbar = ({ vendor }) => {
         </button>
 
         {/* Logo */}
-        <NavLink to="/" className="text-xl font-bold">
-          Remos
+        <NavLink to="/" className="text-base md:text-lg lg:text-xl font-bold">
+          Vendor Dashboard
         </NavLink>
 
         {/* Vendor Info & Logout */}

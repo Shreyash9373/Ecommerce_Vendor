@@ -13,6 +13,7 @@ export default function AddProduct() {
   } = useForm();
 
   const [tags, setTags] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [tagInput, setTagInput] = useState("");
   const [attributes, setAttributes] = useState({});
   const [dimensions, setDimensions] = useState({});
@@ -51,6 +52,7 @@ export default function AddProduct() {
   const onSubmit = async (data) => {
     const formData = new FormData();
     console.log(data);
+    setIsSubmitting(true); // Disable button & show "Submitting..."
 
     // Append form fields
     formData.append("name", data.name);
@@ -107,6 +109,8 @@ export default function AddProduct() {
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
       console.log(error);
+    } finally {
+      setIsSubmitting(false); // Re-enable button
     }
   };
 
@@ -141,7 +145,7 @@ export default function AddProduct() {
           <label className="block mb-2">Category</label>
           <select
             {...register("category", { required: true })}
-            className="border-gray-400 text-gray-400 rounded-md border-2 p-2 w-full"
+            className="border-gray-400  rounded-md border-2 p-2 w-full"
           >
             <option value="">Select Category</option>
             <option value="electronics">Electronics</option>
@@ -155,7 +159,7 @@ export default function AddProduct() {
           <label className="block mb-2">Sub-Category</label>
           <select
             {...register("subCategory", { required: true })}
-            className="border-gray-400 text-gray-400 rounded-md border-2 p-2 w-full"
+            className="border-gray-400  rounded-md border-2 p-2 w-full"
           >
             <option value="">Select Subcategory</option>
             <option value="mobiles">Mobiles</option>
@@ -346,8 +350,11 @@ export default function AddProduct() {
           {errors.images && <p className="text-red-500">Images are required</p>}
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          Submit
+        <button
+          type="submit"
+          className={`${isSubmitting ? "bg-gray-400" : "bg-blue-500"} text-white px-4 py-2 rounded`}
+        >
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>
