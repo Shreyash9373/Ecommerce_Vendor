@@ -115,9 +115,9 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Add Product</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="w-[95%] md:max-w-lg mx-auto bg-blue-200 p-4">
+      <h2 className="text-xl font-bold bg-blue-200 mb-4">Add Product</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-blue-200 ">
         {/* Name  */}
         <div>
           <label className="block mb-2">Name</label>
@@ -164,6 +164,7 @@ export default function AddProduct() {
             <option value="">Select Subcategory</option>
             <option value="mobiles">Mobiles</option>
             <option value="clothing">Clothing</option>
+            <option value="watch">Watches</option>
           </select>
           {errors.subCategory && <p className="text-red-500">Subcategory is required</p>}
         </div>

@@ -27,7 +27,7 @@ const Navbar = ({ vendor }) => {
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-green-800 text-white sticky top-0 shadow-md z-50 w-full py-2 px-4 flex justify-between items-center">
+      <nav className="bg-blue-600 text-white sticky top-0 shadow-md z-50 w-full py-2 px-4 flex justify-between items-center">
         {/* Toggle Sidebar Button */}
         <button
           className="md:hidden text-white text-2xl"
@@ -37,7 +37,7 @@ const Navbar = ({ vendor }) => {
         </button>
 
         {/* Logo */}
-        <NavLink to="/" className="text-base md:text-lg lg:text-xl font-bold">
+        <NavLink to="/dashboard" className="text-base md:text-lg lg:text-xl font-bold">
           Vendor Dashboard
         </NavLink>
 

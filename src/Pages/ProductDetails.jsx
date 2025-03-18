@@ -18,10 +18,11 @@ const ProductDetails = () => {
       const fetchProduct = async () => {
         try {
           const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URI}/api/v1/get-product/${id}`,
+            `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/get-product/${id}`,
             { withCredentials: true }
           );
-          setProduct(response.data.product);
+          // console.log("Res:", response.data.data);
+          setProduct(response.data.data);
           setMainImage(response.data.product.images[0]);
         } catch (err) {
           setError(err.message);

@@ -15,6 +15,7 @@ import EditProduct from "./Pages/EditProduct.jsx";
 import ScrolltoTop from "./Components/ScrollToTop.jsx";
 import Profile from "./Pages/Profile.jsx";
 import ManageOrder from "./Pages/ManageOrder.jsx";
+import ResetPassword from "./Components/ResetPassword.jsx";
 
 const App = () => {
   const { isAuthenticated, vendor } = useSelector((state) => state.vendor); // Get vendor details
@@ -46,9 +47,10 @@ const App = () => {
       <div className="flex h-screen">
         {isAuthenticated && <Sidebar isOpen={isSidebarOpen} toggleSidebar={setIsSidebarOpen} />}
 
-        <div className={`flex-1 transition-all p-6 ${isAuthenticated ? "md:ml-64" : ""}`}>
+        <div className={`flex-1 transition-all ${isAuthenticated ? "md:ml-64" : ""}`}>
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/reset" element={<ResetPassword />} />
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>

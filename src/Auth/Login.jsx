@@ -77,9 +77,12 @@ const Login = () => {
             </div>
 
             <div className="text-right mb-4">
-              <a href="#" className="text-sm text-gray-500 hover:text-yellow-500">
+              <button
+                onClick={() => navigate("/reset")}
+                className="text-sm text-gray-500 hover:text-yellow-500"
+              >
                 Forgot your password?
-              </a>
+              </button>
             </div>
 
             <button

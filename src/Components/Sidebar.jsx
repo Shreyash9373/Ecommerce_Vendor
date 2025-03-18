@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </button>
         </div> */}
 
-        <nav className="mt-12 w-full">
+        <nav className="mt-14 w-full">
           <ul className=" h-full space-y-4">
             {[
               { to: "/dashboard", icon: <HiHome />, label: "Dashboard" },
