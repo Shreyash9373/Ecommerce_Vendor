@@ -26,13 +26,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </button>
         </div> */}
 
-        <nav className=" w-full">
+        <nav className="mt-14 w-full">
           <ul className=" h-full space-y-4">
             {[
-              { to: "/", icon: <HiHome />, label: "Dashboard" },
-              { to: "/ecommerce", icon: <FaShoppingCart />, label: "Ecommerce" },
-              { to: "/category", icon: <FaCubes />, label: "Category" },
-              { to: "/orders", icon: <FaClipboardList />, label: "Orders" },
+              { to: "/dashboard", icon: <HiHome />, label: "Dashboard" },
+              { to: "/view-products", icon: <FaShoppingCart />, label: "View Products" },
+              { to: "/add-product", icon: <FaCubes />, label: "Add Product" },
+              { to: "/manage-orders", icon: <FaClipboardList />, label: "Orders" },
               { to: "/users", icon: <FaUser />, label: "Users" },
               { to: "/roles", icon: <FaUsers />, label: "Roles" },
               { to: "/reports", icon: <FaChartPie />, label: "Reports" },
@@ -55,14 +55,17 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 z-30 md:hidden transition-opacity duration-300"
+          className="fixed  inset-0 bg-black opacity-50  z-30 md:hidden transition-opacity duration-300"
           onClick={() => toggleSidebar(false)}
         ></div>
       )}
 
       {/* Hamburger Menu (Mobile Only) */}
       <div className="fixed top-4 left-4 z-50 md:hidden">
-        <button className="text-2xl text-gray-700" onClick={() => toggleSidebar(!isOpen)}>
+        <button
+          className="text-2xl bg-transparent text-transparent"
+          onClick={() => toggleSidebar(!isOpen)}
+        >
           <HiMenuAlt3 />
         </button>
       </div>

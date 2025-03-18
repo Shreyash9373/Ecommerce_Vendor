@@ -5,34 +5,63 @@ import { useSelector } from "react-redux";
 import ProtectedRoute from "./Components/ProtectedRoutes.jsx";
 import Login from "./Auth/Login";
 import Navbar from "./Components/Navbar.jsx";
-import Sidebar from "./Components/Sidebar.jsx"; // Import Sidebar
+import Sidebar from "./Components/Sidebar.jsx";
 import Dashboard from "./Pages/Dashboard";
 import NotFound from "./Pages/NotFound";
+import AddProduct from "./Pages/AddProduct.jsx";
+import ViewProducts from "./Pages/ViewProducts.jsx";
+import ProductDetails from "./Pages/ProductDetails.jsx";
+import EditProduct from "./Pages/EditProduct.jsx";
+import ScrolltoTop from "./Components/ScrollToTop.jsx";
+import Profile from "./Pages/Profile.jsx";
+import ManageOrder from "./Pages/ManageOrder.jsx";
+import ResetPassword from "./Components/ResetPassword.jsx";
 
 const App = () => {
-  const { isAuthenticated } = useSelector((state) => state.admin);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
+  const { isAuthenticated, vendor } = useSelector((state) => state.vendor); // Get vendor details
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <Router>
-      <ToastContainer />
-      {isAuthenticated && <Navbar />} {/* Navbar visible after login */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{
+          maxWidth: "300px",
+          borderRadius: "4px",
+          fontSize: "0.875rem",
+          padding: "8px",
+          color: "#050505",
+          fontFamily: "sans-serif",
+        }}
+      />
+      <ScrolltoTop />
+      {isAuthenticated && <Navbar vendor={vendor} />} {/* Pass vendor details */}
       <div className="flex h-screen">
-        {/* Sidebar (Hidden behind navbar) */}
         {isAuthenticated && <Sidebar isOpen={isSidebarOpen} toggleSidebar={setIsSidebarOpen} />}
 
-        {/* Main Content Area */}
-        <div className={`flex-1 transition-all p-6 ${isAuthenticated ? "md:ml-64" : ""}`}>
+        <div className={`flex-1 transition-all ${isAuthenticated ? "md:ml-64" : ""}`}>
           <Routes>
-            {/* Public Route */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/reset" element={<ResetPassword />} />
 
-            {/* Protected Routes (Require Authentication) */}
+            {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/view-products" element={<ViewProducts />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/edit-product/:id" element={<EditProduct />} />
+              <Route path="/manage-orders" element={<ManageOrder />} />
             </Route>
-
-            {/* Catch-All 404 Page */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
