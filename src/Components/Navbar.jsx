@@ -80,93 +80,94 @@ const Navbar = ({ vendor }) => {
           </div>
         )}
       </nav>
-
-      {/* Mobile Sidebar */}
-      {sidebarOpen && (
-        <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg p-5 z-50 md:hidden">
-          {/* Toggle Button  */}
-          <button
-            className="absolute top-4 right-4 text-2xl text-gray-600"
-            onClick={() => setSidebarOpen(false)}
-          >
-            <HiX />
-          </button>
-          <ul className="mt-8 space-y-4">
-            <li>
-              <NavLink
-                to="/"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <HiHome className="text-lg" />
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/ecommerce"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FaShoppingCart className="text-lg" />
-                Ecommerce
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/category"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FaCubes className="text-lg" />
-                Category
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/orders"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FaClipboardList className="text-lg" />
-                Orders
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/users"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FaUser className="text-lg" />
-                Users
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/roles"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FaUsers className="text-lg" />
-                Roles
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/reports"
-                className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FaChartPie className="text-lg" />
-                Reports
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      )}
+      {/* // overlay here , from below */}
     </>
   );
 };
 
 export default Navbar;
+
+// {/* Mobile Sidebar */}
+// {sidebarOpen && (
+//   <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg p-5 z-50 md:hidden">
+//     {/* Toggle Button  */}
+//     <button
+//       className="absolute top-4 right-4 text-2xl text-gray-600"
+//       onClick={() => setSidebarOpen(false)}
+//     >
+//       <HiX />
+//     </button>
+//     <ul className="mt-8 space-y-4">
+//       <li>
+//         <NavLink
+//           to="/"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <HiHome className="text-lg" />
+//           Dashboard
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           to="/ecommerce"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <FaShoppingCart className="text-lg" />
+//           Ecommerce
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           to="/category"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <FaCubes className="text-lg" />
+//           Category
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           to="/orders"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <FaClipboardList className="text-lg" />
+//           Orders
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           to="/users"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <FaUser className="text-lg" />
+//           Users
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           to="/roles"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <FaUsers className="text-lg" />
+//           Roles
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           to="/reports"
+//           className="flex items-center gap-3 text-gray-600 hover:text-blue-500"
+//           onClick={() => setSidebarOpen(false)}
+//         >
+//           <FaChartPie className="text-lg" />
+//           Reports
+//         </NavLink>
+//       </li>
+//     </ul>
+//   </div>
+// )}
