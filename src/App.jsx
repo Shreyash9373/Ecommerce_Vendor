@@ -12,7 +12,7 @@ import AddProduct from "./Pages/AddProduct.jsx";
 import ViewProducts from "./Pages/ViewProducts.jsx";
 import ProductDetails from "./Pages/ProductDetails.jsx";
 import EditProduct from "./Pages/EditProduct.jsx";
-import ScrolltoTop from "./Components/ScrollToTop.jsx";
+import ScrolltoTop from "./Components/ScrolltoTop.jsx";
 import Profile from "./Pages/Profile.jsx";
 import ManageOrder from "./Pages/ManageOrder.jsx";
 import ResetPassword from "./Components/ResetPassword.jsx";
