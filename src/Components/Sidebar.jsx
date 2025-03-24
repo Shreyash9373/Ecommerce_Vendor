@@ -15,7 +15,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     <>
       {/* Sidebar */}
       <div
-        className={`fixed  top-0 left-0 w-64 text-lg flex flex-col items-start border-r border-gray-300 bg-white h-screen p-5 shadow-lg z-40 transform transition-transform duration-300 ease-in-out 
+        className={`fixed mt-20  top-0 left-0 w-64 text-lg flex flex-col items-start border-r border-gray-300 bg-white h-screen p-5 shadow-lg z-40 transform transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
         style={{ transition: "transform 0.3s ease-in-out" }} // Ensure smooth transition
       >
@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </button>
         </div> */}
 
-        <nav className="mt-14 w-full">
+        <nav className=" w-full">
           <ul className=" h-full space-y-4">
             {[
               { to: "/dashboard", icon: <HiHome />, label: "Dashboard" },
