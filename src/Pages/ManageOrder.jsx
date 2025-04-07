@@ -56,18 +56,16 @@ const ManageOrder = () => {
       <h2 className="text-3xl font-semibold mb-6 text-start">Manage Orders</h2>
 
       {/* Tabs */}
-      <div className="w-full flex flex-wrap my-4 p-2 py-1 justify-start items-start bg-gray-200 rounded-full max-w-sm sm:max-w-md mx-auto text-xs">
-        {["Processing", "Pending", "Delivered", "Completed", "Cancelled"].map((tab) => (
+      <div className="w-full max-w-2xl flex my-4 p-2 py-1 justify-between items-center bg-gray-200 rounded-full mx-auto text-xs">
+        {["Processing", "Pending", "Shipped", "Delivered", "Completed", "Cancelled"].map((tab) => (
           <button
             key={tab}
-            className={`flex-1 min-w-[80px] py-2 px-2 rounded-full transition-all text-[10px] sm:text-sm ${
-              activeTab === tab
-                ? "bg-blue-400 font-bold text-slate-900  shadow-md"
-                : "text-gray-600"
+            className={`flex-1 py-2 px-2 rounded-full transition-all text-[10px] sm:text-sm ${
+              activeTab === tab ? "bg-blue-400 font-bold text-slate-900 shadow-md" : "text-gray-600"
             }`}
             onClick={() => setActiveTab(tab)}
           >
-            <span className="capitalize">{tab}</span>
+            <span className="capitalize block text-center">{tab}</span>
           </button>
         ))}
       </div>
