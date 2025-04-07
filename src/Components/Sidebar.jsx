@@ -15,7 +15,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     <>
       {/* Sidebar */}
       <div
-        className={`fixed mt-20  top-0 left-0 w-64 text-lg flex flex-col items-start border-r border-gray-300 bg-white h-screen p-5 shadow-lg z-40 transform transition-transform duration-300 ease-in-out 
+        className={`fixed mt-20  top-0 left-0 w-64 text-lg flex flex-col items-start border-r border-gray-300 bg-white h-screen p-3 shadow-lg z-40 transform transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
         style={{ transition: "transform 0.3s ease-in-out" }} // Ensure smooth transition
       >
@@ -32,10 +32,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               { to: "/dashboard", icon: <HiHome />, label: "Dashboard" },
               { to: "/view-products", icon: <FaShoppingCart />, label: "View Products" },
               { to: "/add-product", icon: <FaCubes />, label: "Add Product" },
-              { to: "/manage-orders", icon: <FaClipboardList />, label: "Orders" },
-              { to: "/users", icon: <FaUser />, label: "Users" },
-              { to: "/roles", icon: <FaUsers />, label: "Roles" },
-              { to: "/reports", icon: <FaChartPie />, label: "Reports" },
+              { to: "/manage-orders", icon: <FaClipboardList />, label: "Manage Orders" },
+              { to: "/earnings", icon: <FaUser />, label: "Payment & Earnings" },
+              { to: "/settings", icon: <FaUsers />, label: "Store Setting" },
+              { to: "/reviews", icon: <FaChartPie />, label: "Review & Ratings" },
             ].map(({ to, icon, label }) => (
               <li key={to} className="w-full">
                 <Link
