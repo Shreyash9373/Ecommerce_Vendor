@@ -33,7 +33,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               { to: "/view-products", icon: <FaShoppingCart />, label: "View Products" },
               { to: "/add-product", icon: <FaCubes />, label: "Add Product" },
               { to: "/manage-orders", icon: <FaClipboardList />, label: "Manage Orders" },
-              { to: "/earnings", icon: <FaUser />, label: "Payment & Earnings" },
+              { to: "/payment-earnings", icon: <FaUser />, label: "Payment & Earnings" },
               { to: "/settings", icon: <FaUsers />, label: "Store Setting" },
               { to: "/reviews", icon: <FaChartPie />, label: "Review & Ratings" },
             ].map(({ to, icon, label }) => (

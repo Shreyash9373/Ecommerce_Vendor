@@ -14,7 +14,7 @@ const ManageOrder = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URI}/api/v1/order/get-OrderStatus`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/order/order-status`,
         {
           params: { status },
           withCredentials: true,
