@@ -5,11 +5,21 @@ import EarningsPage from "./Payment & Earning/EarningsPage";
 
 export default function PaymentEarnings() {
   const [vendor, setVendor] = useState(null);
+  const [earning, setEarning] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchVendor = async () => {
       try {
+        const earning = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/earning-overview`,
+          {
+            withCredentials: true,
+          }
+        );
+        setEarning(earning.data.data);
+        console.log(earning.data.data);
+
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/get-vendor`,
           {
@@ -33,7 +43,7 @@ export default function PaymentEarnings() {
 
   return (
     <div className="p-6 space-y-12">
-      <EarningsPage vendor={vendor} />
+      <EarningsPage vendor={earning} />
       <PaymentsPage vendor={vendor} />
     </div>
   );

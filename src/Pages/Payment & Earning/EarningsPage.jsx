@@ -6,8 +6,8 @@ export default function EarningsPage({ vendor }) {
       <h1 className="text-3xl font-bold mb-6">Earnings Overview</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card title="Total Earnings" value={`₹${vendor.balance}`} color="bg-green-500" />
-        <Card title="Total Sales" value={vendor.totalSales} color="bg-purple-500" />
+        <Card title="Total Earnings" value={`₹${vendor.totalSalesAmount}`} color="bg-green-500" />
+        <Card title="Total Sales" value={`₹${vendor.totalSalesAmount}`} color="bg-purple-500" />
         <Card title="Total Orders" value={vendor.totalOrders} color="bg-orange-500" />
         <Card title="Customer Count" value={vendor.customerCount} color="bg-blue-500" />
       </div>
