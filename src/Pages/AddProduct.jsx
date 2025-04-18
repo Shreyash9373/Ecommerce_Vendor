@@ -16,6 +16,7 @@ export default function AddProduct() {
   } = useForm();
 
   // State variables
+
   const [tags, setTags] = useState([]); // Stores product tags
   const [isSubmitting, setIsSubmitting] = useState(false); // Tracks form submission status
   const [tagInput, setTagInput] = useState(""); // Input field for adding tags
@@ -24,7 +25,8 @@ export default function AddProduct() {
   const [attrKey, setAttrKey] = useState(""); // Input field for attribute key
   const [attrValue, setAttrValue] = useState(""); // Input field for attribute value
   const [categories, setCategories] = useState([]); // dynamic categories
-
+  const [mainCategories, setMainCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
   // --- Handler Functions ---
 
   // Get categories
@@ -36,13 +38,20 @@ export default function AddProduct() {
           { withCredentials: true }
         );
         setCategories(response.data.data);
+
+        const main = response.data.data.filter((cat) => cat.parentCategory === null);
+        const sub = response.data.data.filter((cat) => cat.parentCategory !== null);
+
+        setMainCategories(main);
+        setSubCategories(sub);
         console.log("All Categories:", response.data.data);
+        console.log("Main Categories:", main);
+        console.log("Sub Categories:", sub);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
     fetchCategories();
-    console.log("Cate: ", categories);
   }, []);
 
   // Adds a new tag to the tags list
@@ -254,13 +263,8 @@ export default function AddProduct() {
                   className={`w-full px-4 py-2 border ${errors.category ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition duration-150 ease-in-out bg-white`} // Added bg-white for consistency
                 >
                   <option value="">Select Category</option>
-                  <option value="electronics">Electronics</option>
-                  <option value="fashion">Fashion</option>
-                  <option value="home">Home</option>
-                  <option value="home">Garden</option>
-                  <option value="sports">Sports</option>
-                  <option value="sports">Outdoors</option>
-                  {categories.map((category) => (
+
+                  {mainCategories.map((category) => (
                     <option key={category._id} value={category._id}>
                       {category.name}
                     </option>
@@ -286,14 +290,13 @@ export default function AddProduct() {
                   className={`w-full px-4 py-2 border ${errors.subCategory ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition duration-150 ease-in-out bg-white`}
                 >
                   <option value="">Select Subcategory</option>
-                  {/* Ideally, options should dynamically change based on selected category */}
-                  <option value="headphones">Headphones</option>
-                  <option value="mobiles">Mobiles</option>
-                  <option value="laptops">Laptops</option>
-                  <option value="clothing">Clothing</option>
-                  <option value="shoes">Shoes</option>
-                  <option value="watches">Watches</option>
                   {/* Add more subcategories */}
+
+                  {subCategories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
                 </select>
                 {errors.subCategory && (
                   <p className="mt-1 text-xs text-red-600">{errors.subCategory.message}</p>

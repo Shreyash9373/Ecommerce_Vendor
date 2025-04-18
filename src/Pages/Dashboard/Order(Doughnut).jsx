@@ -82,7 +82,8 @@ export const Order = () => {
         <h2 className="text-xl font-semibold text-gray-800">Order Status Overview</h2>
 
         {/* Month & Year Selectors */}
-        <div className="flex items-center gap-4">
+
+        {/* <div className="flex items-center gap-4">
           <div>
             <label htmlFor="month" className="block text-xs font-medium text-gray-500 mb-1">
               Month
@@ -118,7 +119,46 @@ export const Order = () => {
               ))}
             </select>
           </div>
+        </div> */}
+
+        {/* new  */}
+        <div className="flex gap-4 items-end">
+          <div>
+            <label htmlFor="month" className="block text-xs text-gray-500 mb-1">
+              Month
+            </label>
+            <select
+              id="month"
+              value={month}
+              onChange={(e) => setMonth(+e.target.value)}
+              className="text-sm border border-gray-300 rounded-md px-3 py-1.5 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+              {[...Array(12)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {new Date(0, i).toLocaleString("default", { month: "short" })}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="year" className="block text-xs text-gray-500 mb-1">
+              Year
+            </label>
+            <select
+              id="year"
+              value={year}
+              onChange={(e) => setYear(+e.target.value)}
+              className="text-sm border border-gray-300 rounded-md px-3 py-1.5 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+              {yearOptions.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+        {/* new */}
       </div>
 
       {/* Chart Display */}

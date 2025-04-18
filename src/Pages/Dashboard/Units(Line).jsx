@@ -164,6 +164,7 @@ export const Units = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h2 className="text-xl font-semibold text-gray-800">Units Sold Overview</h2>
 
+        {/* Month & Year Selectors */}
         <div className="flex gap-4 items-end">
           <div>
             <label htmlFor="month" className="block text-xs text-gray-500 mb-1">
