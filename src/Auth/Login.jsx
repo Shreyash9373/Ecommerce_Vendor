@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-[#F0F8FF]">
       <div className="relative bg-white shadow-lg rounded-2xl w-96 overflow-hidden">
         {/*  Header */}
         <div className="relative bg-yellow-500 p-10 text-white text-center">
