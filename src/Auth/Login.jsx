@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -7,6 +7,8 @@ import { setVendor } from "../redux/slices/vendorSlice.js";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -17,7 +19,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log("Form data", data);
+    // console.log("Form data", data);
+    setIsDisabled(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/login`,
@@ -25,7 +28,7 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      console.log("Response", response);
+      // console.log("Response", response);
 
       if (response.data) {
         toast.success(response.data.message || "Login Successful");
@@ -36,7 +39,9 @@ const Login = () => {
         // Redirect to dashboard after login
         navigate("/dashboard");
       }
+      setIsDisabled(false);
     } catch (error) {
+      setIsDisabled(false);
       toast.error(error.response?.data?.message || "Failed to Login");
     }
   };
@@ -87,9 +92,11 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold p-3 rounded-lg transition"
+              disabled={isDisabled}
+              className={`w-full text-white font-bold p-3 rounded-lg transition 
+                ${isDisabled ? "bg-yellow-300 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"}`}
             >
-              Sign In
+              {isDisabled ? "Signing In..." : "Sign In"}
             </button>
           </form>
         </div>

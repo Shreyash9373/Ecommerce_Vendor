@@ -25,7 +25,7 @@ const BestProductsOverview = () => {
 
         if (res.data?.success && Array.isArray(res.data.data.topProducts)) {
           setProducts(res.data.data.topProducts);
-          console.log("best products:", res.data.data.topProducts);
+          // console.log("best products:", res.data.data.topProducts);
         } else {
           throw new Error("No products found.");
         }

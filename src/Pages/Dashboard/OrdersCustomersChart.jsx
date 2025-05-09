@@ -59,7 +59,7 @@ export const OrdersCustomersChart = () => {
         );
 
         const response = res.data?.data;
-        console.log("Combo Chart Response:", response);
+        // console.log("Combo Chart Response:", response);
 
         if (response?.labels?.length && response?.orders?.length && response?.customers?.length) {
           setComboData({
@@ -91,7 +91,7 @@ export const OrdersCustomersChart = () => {
           setError("No data available for this month.");
         }
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         setError("Failed to fetch data.");
       } finally {
         setLoading(false);

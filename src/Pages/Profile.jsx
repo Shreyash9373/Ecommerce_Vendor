@@ -15,7 +15,7 @@ const Profile = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setVendor(response.data.data);
       } catch (err) {
         setError("Failed to load profile. Please try again.");

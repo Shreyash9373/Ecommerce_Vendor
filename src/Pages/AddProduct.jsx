@@ -44,11 +44,11 @@ export default function AddProduct() {
 
         setMainCategories(main);
         setSubCategories(sub);
-        console.log("All Categories:", response.data.data);
-        console.log("Main Categories:", main);
-        console.log("Sub Categories:", sub);
+        // console.log("All Categories:", response.data.data);
+        // console.log("Main Categories:", main);
+        // console.log("Sub Categories:", sub);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        // console.error("Error fetching categories:", error);
       }
     };
     fetchCategories();
@@ -145,7 +145,7 @@ export default function AddProduct() {
 
     // --- API Call ---
     try {
-      console.log("Submitting FormData:", Object.fromEntries(formData.entries())); // Log FormData contents for debugging
+      // console.log("Submitting FormData:", Object.fromEntries(formData.entries())); // Log FormData contents for debugging
 
       // Replace with your actual API endpoint
       const response = await axios.post(
@@ -159,7 +159,7 @@ export default function AddProduct() {
         }
       );
 
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
 
       if (response.data) {
         toast.success(response.data.message || "Product added successfully!");
@@ -174,7 +174,7 @@ export default function AddProduct() {
       setAttrKey("");
       setAttrValue("");
     } catch (error) {
-      console.error("API Error:", error);
+      // console.error("API Error:", error);
       // Display more specific error from backend if available
       toast.error(error.response?.data?.message || "An error occurred while adding the product.");
     } finally {

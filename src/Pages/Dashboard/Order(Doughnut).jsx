@@ -40,10 +40,10 @@ export const Order = () => {
           `${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/order-status?month=${month}&year=${year}`,
           { withCredentials: true }
         );
-        console.log("Res:", res.data?.data);
+        // console.log("Res:", res.data?.data);
 
         const response = res.data?.data?.orderStatus?.[0];
-        console.log("Response:", response);
+        // console.log("Response:", response);
 
         if (response && response.labels?.length && response.data?.length) {
           const { labels, data, total } = response;
@@ -66,7 +66,7 @@ export const Order = () => {
           setError("No orders available for this month.");
         }
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         setError("Failed to fetch data.");
       } finally {
         setLoading(false);

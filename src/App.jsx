@@ -64,7 +64,7 @@ const App = () => {
               <Route path="/edit-product/:id" element={<EditProduct />} />
               <Route path="/manage-orders" element={<ManageOrder />} />
               <Route path="/payment-earnings" element={<PaymentEarnings />} />
-              <Route path="/settings" element={<StoreSettingsPage />} />
+              <Route path="/store" element={<StoreSettingsPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

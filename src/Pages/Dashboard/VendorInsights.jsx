@@ -27,9 +27,9 @@ const VendorInsights = () => {
           { withCredentials: true }
         );
         setInsights(res.data.data);
-        console.log("object", res.data.data);
+        // console.log("object", res.data.data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         setError("Failed to fetch vendor insights.");
       } finally {
         setLoading(false);

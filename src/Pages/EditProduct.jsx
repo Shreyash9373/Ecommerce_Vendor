@@ -56,7 +56,7 @@ export default function EditProduct() {
   };
 
   useEffect(() => {
-    console.log("Id: ", productId);
+    // console.log("Id: ", productId);
 
     const fetchProduct = async () => {
       try {
@@ -65,7 +65,7 @@ export default function EditProduct() {
           { withCredentials: true }
         );
         const product = response.data.data.product;
-        console.log("Fetched Product: ", product);
+        // console.log("Fetched Product: ", product);
         // Ensure product data exists before resetting the form
         if (product) {
           reset({
@@ -88,7 +88,7 @@ export default function EditProduct() {
         }
       } catch (error) {
         toast.error("Failed to fetch product details");
-        console.error(error);
+        // console.error(error);
       }
     };
     if (productId) {
@@ -106,7 +106,7 @@ export default function EditProduct() {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-    console.log("Submit data: ", data);
+    // console.log("Submit data: ", data);
     setIsSubmitting(true); // Disable button & show "Submitting..."
 
     // Append form fields
@@ -153,7 +153,7 @@ export default function EditProduct() {
         }
       );
 
-      console.log("Response", response.data);
+      // console.log("Response", response.data);
 
       if (response.data) {
         toast.success(response.data.message || "Product added successfully");
@@ -167,7 +167,7 @@ export default function EditProduct() {
       navigate("/view-products");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
-      console.log(error);
+      // console.log(error);
     } finally {
       setIsSubmitting(false); // Re-enable button
     }
