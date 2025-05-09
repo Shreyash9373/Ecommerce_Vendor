@@ -8,7 +8,7 @@ import {
   FaChartPie,
 } from "react-icons/fa";
 import { HiHome, HiMenuAlt3 } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
@@ -33,19 +33,25 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               { to: "/view-products", icon: <FaShoppingCart />, label: "View Products" },
               { to: "/add-product", icon: <FaCubes />, label: "Add Product" },
               { to: "/manage-orders", icon: <FaClipboardList />, label: "Manage Orders" },
-              { to: "/earnings", icon: <FaUser />, label: "Payment & Earnings" },
-              { to: "/settings", icon: <FaUsers />, label: "Store Setting" },
-              { to: "/reviews", icon: <FaChartPie />, label: "Review & Ratings" },
+              { to: "/payment-earnings", icon: <FaUser />, label: "Payment & Earnings" },
+              { to: "/store", icon: <FaUsers />, label: "Store Overview" },
+              // { to: "/reviews", icon: <FaChartPie />, label: "Review & Ratings" },
             ].map(({ to, icon, label }) => (
               <li key={to} className="w-full">
-                <Link
+                <NavLink
                   to={to}
-                  className="flex items-center gap-3 text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md w-full hover:bg-gray-100 md:mt-0 md:text-lg text-xl"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 rounded-md w-full transition-all md:text-lg text-xl ${
+                      isActive
+                        ? "bg-blue-100 text-blue-600 font-semibold"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                    }`
+                  }
                   onClick={() => toggleSidebar(false)}
                 >
                   <span className="text-xl">{icon}</span>
                   {label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>

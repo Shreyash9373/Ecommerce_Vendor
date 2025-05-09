@@ -16,6 +16,8 @@ import ScrolltoTop from "./Components/ScrolltoTop.jsx";
 import Profile from "./Pages/Profile.jsx";
 import ManageOrder from "./Pages/ManageOrder.jsx";
 import ResetPassword from "./Components/ResetPassword.jsx";
+import PaymentEarnings from "./Pages/PaymentEarnings.jsx";
+import StoreSettingsPage from "./Pages/StoreSettingsPage.jsx";
 
 const App = () => {
   const { isAuthenticated, vendor } = useSelector((state) => state.vendor); // Get vendor details
@@ -61,6 +63,8 @@ const App = () => {
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/edit-product/:id" element={<EditProduct />} />
               <Route path="/manage-orders" element={<ManageOrder />} />
+              <Route path="/payment-earnings" element={<PaymentEarnings />} />
+              <Route path="/store" element={<StoreSettingsPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

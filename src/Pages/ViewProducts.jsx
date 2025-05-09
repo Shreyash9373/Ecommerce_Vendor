@@ -18,7 +18,7 @@ const ViewProducts = () => {
           `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/getAll-Products`,
           { withCredentials: true }
         );
-        console.log("All Products", response.data.data);
+        // console.log("All Products", response.data.data);
         setProducts(response.data.data);
       } catch (err) {
         setError(err.message);
@@ -44,9 +44,9 @@ const ViewProducts = () => {
         }
       );
 
-      console.log("Response", response.data);
+      // console.log("Response", response.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -59,12 +59,11 @@ const ViewProducts = () => {
     //       withCredentials: true,
     //     }
     //   );
-
     //   console.log("Response", response.data);
     // } catch (error) {
     //   console.log(error);
     // }
-    console.log("Product Deleted:", productId);
+    // console.log("Product Deleted:", productId);
   };
 
   const toggleMenu = (productId) => {
