@@ -29,7 +29,7 @@ const ResetPassword = () => {
     setLoading(true);
     setMessage("");
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/send-otp`, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/v1/admin/sendOtp`, {
         email,
       });
       setOtpSent(true);
@@ -53,7 +53,7 @@ const ResetPassword = () => {
     setLoading(true);
     setMessage("");
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/verify-otp`, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/v1/admin/verifyOtp`, {
         email,
         otp,
       });

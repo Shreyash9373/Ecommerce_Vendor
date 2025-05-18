@@ -15,9 +15,10 @@ import EditProduct from "./Pages/EditProduct.jsx";
 import ScrolltoTop from "./Components/ScrolltoTop.jsx";
 import Profile from "./Pages/Profile.jsx";
 import ManageOrder from "./Pages/ManageOrder.jsx";
-import ResetPassword from "./Components/ResetPassword.jsx";
+import ResetPassword from "./Auth/ResetPassword.jsx";
 import PaymentEarnings from "./Pages/PaymentEarnings.jsx";
 import StoreSettingsPage from "./Pages/StoreSettingsPage.jsx";
+import ProductAnalytic from "./Pages/Dashboard/ProductAnalytic.jsx";
 
 const App = () => {
   const { isAuthenticated, vendor } = useSelector((state) => state.vendor); // Get vendor details
@@ -58,6 +59,7 @@ const App = () => {
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/product-analytic/:id" element={<ProductAnalytic />} />
               <Route path="/view-products" element={<ViewProducts />} />
               <Route path="/add-product" element={<AddProduct />} />
               <Route path="/product/:id" element={<ProductDetails />} />
