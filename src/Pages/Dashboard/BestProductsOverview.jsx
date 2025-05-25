@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaBoxOpen, FaRupeeSign, FaStar, FaImage } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const BestProductsOverview = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   const today = new Date();
   const [month, setMonth] = useState(today.getMonth() + 1);
   const [year, setYear] = useState(today.getFullYear());
   const yearOptions = Array.from({ length: 4 }, (_, i) => year - 2 + i);
+
+  const goToProductAnalytic = (product) => {
+    navigate(`/product-analytic/${product.productId}`, { state: { product } });
+  };
 
   useEffect(() => {
     const fetchBestProducts = async () => {
@@ -25,7 +32,7 @@ const BestProductsOverview = () => {
 
         if (res.data?.success && Array.isArray(res.data.data.topProducts)) {
           setProducts(res.data.data.topProducts);
-          // console.log("best products:", res.data.data.topProducts);
+          console.log("best products:", res.data.data.topProducts);
         } else {
           throw new Error("No products found.");
         }
@@ -43,7 +50,7 @@ const BestProductsOverview = () => {
     <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 space-y-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h2 className="text-xl font-semibold text-gray-800">Best Products Overview</h2>
+        <h2 className="text-xl font-semibold text-gray-800">Sold Products Overview</h2>
         <div className="flex gap-4 items-end">
           <div>
             <label htmlFor="month" className="block text-xs text-gray-500 mb-1">
@@ -94,6 +101,7 @@ const BestProductsOverview = () => {
           {products.map((product, i) => (
             <div
               key={i}
+              onClick={() => goToProductAnalytic(product)}
               className="border rounded-lg p-4 flex gap-4 items-center shadow-sm hover:shadow-md transition"
             >
               {product.image ? (

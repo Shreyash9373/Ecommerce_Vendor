@@ -25,7 +25,7 @@ const ManageOrder = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URI}/api/v1/order/order-status`,
+        `₹{import.meta.env.VITE_BACKEND_URI}/api/v1/order/order-status`,
         {
           params: { status },
           withCredentials: true,
@@ -46,7 +46,7 @@ const ManageOrder = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URI}/api/v1/order/update-OrderStatus`,
+        `₹{import.meta.env.VITE_BACKEND_URI}/api/v1/order/update-OrderStatus`,
         data,
         {
           withCredentials: true,
@@ -69,7 +69,7 @@ const ManageOrder = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition shadow-sm ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition shadow-sm ₹{
               activeTab === tab
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -107,7 +107,7 @@ const ManageOrder = () => {
                         <span className="font-medium">Name:</span> {item.productSnapshot.name}
                       </p>
                       <p>
-                        <span className="font-medium">Price:</span> ${item.productSnapshot.price}
+                        <span className="font-medium">Price:</span> ₹{item.productSnapshot.price}
                       </p>
                       <p>
                         <span className="font-medium">Quantity:</span> {item.quantity}
@@ -119,7 +119,7 @@ const ManageOrder = () => {
                 <div className="bg-gray-50 p-4 rounded-md">
                   <h4 className="font-semibold text-gray-700 mb-2">Payment Details</h4>
                   <p>
-                    <FaMoneyBill className="inline mr-2 text-green-500" /> Amount: $
+                    <FaMoneyBill className="inline mr-2 text-green-500" /> Amount: ₹
                     {order.totalAmount}
                   </p>
                   <p>Method: {order.paymentMethod}</p>
@@ -145,14 +145,14 @@ const ManageOrder = () => {
                 </p>
                 <form
                   onSubmit={handleSubmit((data) => {
-                    const status = data[`status-${order._id}`];
+                    const status = data[`status-₹{order._id}`];
                     const requestData = { status, id: order._id };
                     onSubmit(requestData);
                   })}
                   className="space-y-3"
                 >
                   <select
-                    {...register(`status-${order._id}`)}
+                    {...register(`status-₹{order._id}`)}
                     defaultValue={order.status}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
                   >

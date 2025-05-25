@@ -89,6 +89,12 @@ const ProductDetails = () => {
             </span>
           </p>
           <p className="text-lg font-medium mt-2">
+            Stock:{" "}
+            <span className={`text-${product.stock > 0 ? "blue" : "red"}-600`}>
+              {product.stock}
+            </span>
+          </p>
+          <p className="text-lg font-medium mt-2">
             Weight: <span className="text-gray-700">{product.weight} grams</span>
           </p>
           <p className="text-lg font-medium mt-2">
