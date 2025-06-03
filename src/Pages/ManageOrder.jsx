@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaBox, FaMapMarkedAlt, FaMoneyBill, FaExchangeAlt } from "react-icons/fa";
@@ -25,15 +25,17 @@ const ManageOrder = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `₹{import.meta.env.VITE_BACKEND_URI}/api/v1/order/order-status`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/order/order-status`,
         {
           params: { status },
           withCredentials: true,
         }
       );
       setOrders(response.data.data.orders);
+      // console.log(response.data.data.orders);
     } catch (err) {
-      setError("Failed to fetch order details.");
+      setError("Failed to fetch order details.", err);
+      // console.log("Failed to fetch order details.", err);
     } finally {
       setLoading(false);
     }
@@ -56,7 +58,7 @@ const ManageOrder = () => {
 
       fetchOrders(activeTab); // Refresh orders
     } catch (error) {
-      setError("Failed to update order status.");
+      setError("Failed to update order status.", error);
     }
   };
 
