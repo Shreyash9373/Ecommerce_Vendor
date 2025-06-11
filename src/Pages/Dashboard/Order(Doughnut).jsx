@@ -25,6 +25,7 @@ export const Order = () => {
   const [totalOrders, setTotalOrders] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [noData, setNoData] = useState(false); // ✅ Added flag to track empty data
 
   const yearOptions = Array.from({ length: 4 }, (_, i) => today.getFullYear() - 2 + i);
 
@@ -35,17 +36,18 @@ export const Order = () => {
         setError(null);
         setDoughnutData(null);
         setTotalOrders(0);
+        setNoData(false); // ✅ Reset noData flag
 
         const res = await axios.get(
           `${import.meta.env.VITE_BACKEND_URI}/api/v1/vendor/order-status?month=${month}&year=${year}`,
           { withCredentials: true }
         );
-        // console.log("Res:", res.data?.data);
 
+        console.log("Res:", res.data?.data);
         const response = res.data?.data?.orderStatus?.[0];
-        // console.log("Response:", response);
 
         if (response && response.labels?.length && response.data?.length) {
+          // ✅ Valid order data found
           const { labels, data, total } = response;
 
           setDoughnutData({
@@ -61,12 +63,23 @@ export const Order = () => {
           });
           setTotalOrders(total);
         } else {
-          setDoughnutData(null);
+          // ✅ Empty data - show a neutral doughnut chart
+          setDoughnutData({
+            labels: ["No Orders"],
+            datasets: [
+              {
+                label: "Order Status",
+                data: [1], // Dummy data
+                backgroundColor: ["#E5E7EB"], // Gray color for empty chart
+                borderWidth: 1,
+              },
+            ],
+          });
           setTotalOrders(0);
-          setError("No orders available for this month.");
+          setNoData(true); // ✅ Mark no data
         }
       } catch (err) {
-        // console.error(err);
+        console.error(err);
         setError("Failed to fetch data.");
       } finally {
         setLoading(false);
@@ -77,51 +90,11 @@ export const Order = () => {
   }, [month, year]);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-4  sm:p-6 space-y-4">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 space-y-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-xl font-semibold text-gray-800">Order Status Overview</h2>
 
         {/* Month & Year Selectors */}
-
-        {/* <div className="flex items-center gap-4">
-          <div>
-            <label htmlFor="month" className="block text-xs font-medium text-gray-500 mb-1">
-              Month
-            </label>
-            <select
-              id="month"
-              value={month}
-              onChange={(e) => setMonth(Number(e.target.value))}
-              className="block w-full text-sm border-gray-300 rounded-md"
-            >
-              {[...Array(12)].map((_, i) => (
-                <option key={i + 1} value={i + 1}>
-                  {new Date(0, i).toLocaleString("default", { month: "short" })}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="year" className="block text-xs font-medium text-gray-500 mb-1">
-              Year
-            </label>
-            <select
-              id="year"
-              value={year}
-              onChange={(e) => setYear(Number(e.target.value))}
-              className="block w-full text-sm border-gray-300 rounded-md"
-            >
-              {yearOptions.map((y) => (
-                <option key={y} value={y}>
-                  {y}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div> */}
-
-        {/* new  */}
         <div className="flex gap-4 items-end">
           <div>
             <label htmlFor="month" className="block text-xs text-gray-500 mb-1">
@@ -158,14 +131,15 @@ export const Order = () => {
             </select>
           </div>
         </div>
-        {/* new */}
       </div>
 
       {/* Chart Display */}
       <div className="flex flex-col items-center justify-center h-80">
-        {loading && <LoadingSpinner />}
-        {error && <div className="text-red-500">{error}</div>}
-        {!loading && !error && doughnutData && (
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <ErrorMessage message={error} />
+        ) : (
           <>
             <Doughnut
               data={doughnutData}
@@ -183,16 +157,22 @@ export const Order = () => {
                   tooltip: {
                     callbacks: {
                       label: (context) => {
-                        return `${context.label}: ${context.raw}`;
+                        return noData ? "No Orders" : `${context.label}: ${context.raw}`;
                       },
                     },
                   },
                 },
               }}
             />
-            <p className="my-4 text-sm text-gray-600">
-              Total Orders: <span className="font-medium">{totalOrders}</span>
-            </p>
+            {noData ? (
+              <p className="mt-4 text-sm text-gray-500 italic">
+                No orders available for this month.
+              </p> // ✅ Styled message
+            ) : (
+              <p className="my-4 text-sm text-gray-600">
+                Total Orders: <span className="font-medium">{totalOrders}</span>
+              </p>
+            )}
           </>
         )}
       </div>

@@ -18,7 +18,7 @@ const ViewProducts = () => {
           `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/getAll-Products`,
           { withCredentials: true }
         );
-        // console.log("All Products", response.data.data);
+        console.log("All Products", response.data.data);
         setProducts(response.data.data);
       } catch (err) {
         setError(err.message);
@@ -34,36 +34,37 @@ const ViewProducts = () => {
     navigate(`/product/${product._id}`, { state: { product } });
   };
 
-  const unlistProduct = async (productId) => {
+  // const unlistProduct = async (productId) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/update-Product/${productId}`,
+  //       { status: "unlisted" },
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+
+  //     // console.log("Response", response.data);
+  //   } catch (error) {
+  //     // console.log(error);
+  //   }
+  // };
+
+  const deleteProduct = async (productId) => {
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/update-Product/${productId}`,
-        { status: "unlisted" },
+      console.log("proID", productId);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/delete-product/${productId}`,
+
         {
           withCredentials: true,
         }
       );
-
-      // console.log("Response", response.data);
+      console.log("Response", response.data);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
-  };
-
-  const deleteProduct = async (productId) => {
-    // try {
-    //   const response = await axios.put(
-    //     `${import.meta.env.VITE_BACKEND_URI}/api/v1/product/update-Product/${productId}`,
-    //     { status: "unlisted" },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   console.log("Response", response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // console.log("Product Deleted:", productId);
+    console.log("Product Deleted:", productId);
   };
 
   const toggleMenu = (productId) => {
@@ -91,6 +92,7 @@ const ViewProducts = () => {
           <div className="mt-2">
             <h2 className="text-lg font-semibold">{product.name}</h2>
             <p className="text-gray-700">₹{product.price.toLocaleString()}</p>
+            <p className="text-blue-700">{product.status}</p>
           </div>
 
           {/* Three Dots Menu at Bottom Right */}
@@ -115,7 +117,7 @@ const ViewProducts = () => {
                   onClick={() => deleteProduct(product._id)}
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
                 >
-                  🗑️ Delete
+                  🗑️ Unlist
                 </button>
                 {/* <button
                   onClick={() => unlistProduct(product._id)}

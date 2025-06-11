@@ -3,6 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaBox, FaMapMarkedAlt, FaMoneyBill, FaExchangeAlt } from "react-icons/fa";
 import { MdOutlinePendingActions, MdLocalShipping, MdDone, MdCancel } from "react-icons/md";
+import { LuClockAlert } from "react-icons/lu";
 
 const statusIcons = {
   Pending: <MdOutlinePendingActions className="inline mr-1 text-yellow-600" />,
@@ -32,7 +33,7 @@ const ManageOrder = () => {
         }
       );
       setOrders(response.data.data.orders);
-      // console.log(response.data.data.orders);
+      console.log(response.data.data.orders);
     } catch (err) {
       setError("Failed to fetch order details.", err);
       // console.log("Failed to fetch order details.", err);
@@ -47,14 +48,15 @@ const ManageOrder = () => {
 
   const onSubmit = async (data) => {
     try {
+      console.log("daat:", data);
       const response = await axios.put(
-        `₹{import.meta.env.VITE_BACKEND_URI}/api/v1/order/update-OrderStatus`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/order/update-OrderStatus`,
         data,
         {
           withCredentials: true,
         }
       );
-      // console.log("RR:", response);
+      console.log("RR:", response);
 
       fetchOrders(activeTab); // Refresh orders
     } catch (error) {
@@ -94,9 +96,21 @@ const ManageOrder = () => {
               key={order._id}
               className="bg-white rounded-xl shadow-lg p-6 border border-gray-200"
             >
-              <div className="mb-4">
-                <h3 className="text-lg font-bold text-gray-800 flex items-center">
-                  <FaBox className="mr-2 text-blue-500" /> Order ID: {order._id}
+              <div className="mb-4 flex flex-col">
+                <h3 className="lg:text-lg text-base font-bold text-gray-800 flex flex-row items-center">
+                  <FaBox className="mr-2 size-5  text-blue-500" /> Order ID: {order._id}
+                </h3>
+                <h3 className="lg:text-lg text-base font-bold text-gray-800 flex items-center">
+                  <LuClockAlert className="mr-2 size-5 text-blue-500" />
+                  Order Date:{" "}
+                  {new Date(order.createdAt).toLocaleString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
                 </h3>
               </div>
 
@@ -147,14 +161,14 @@ const ManageOrder = () => {
                 </p>
                 <form
                   onSubmit={handleSubmit((data) => {
-                    const status = data[`status-₹{order._id}`];
+                    const status = data[`status-${order._id}`];
                     const requestData = { status, id: order._id };
                     onSubmit(requestData);
                   })}
                   className="space-y-3"
                 >
                   <select
-                    {...register(`status-₹{order._id}`)}
+                    {...register(`status-${order._id}`)}
                     defaultValue={order.status}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
                   >

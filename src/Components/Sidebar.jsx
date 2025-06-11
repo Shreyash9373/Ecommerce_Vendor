@@ -67,7 +67,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       )}
 
       {/* Hamburger Menu (Mobile Only) */}
-      <div className="fixed top-4 left-4 z-50 md:hidden">
+      <div className="fixed top-6  left-4 z-50 md:hidden">
         <button
           className="text-2xl bg-transparent text-transparent"
           onClick={() => toggleSidebar(!isOpen)}

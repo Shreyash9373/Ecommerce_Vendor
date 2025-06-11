@@ -140,6 +140,17 @@ const ProductDetails = () => {
             </div>
           </div>
 
+          <div>
+            <p className="text-lg font-medium mt-2">
+              Status:{" "}
+              <span
+                className={`${product.status == "approved" ? "text-blue-600" : "text-red-600"} capitalize`}
+              >
+                {product.status == "approved" ? "Approved" : `${product.status}`}
+              </span>
+            </p>
+          </div>
+
           {/* View More Button */}
           <button
             onClick={() => goToUpdateProduct(product)}
